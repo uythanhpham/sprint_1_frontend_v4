@@ -7,12 +7,14 @@
     * {
       box-sizing: border-box;
     }
+
     body {
       margin: 0;
       padding: 40px;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(45deg, #dbb0e3, #F3E5F5);
     }
+
     .container {
       position: relative;
       width: 100%;
@@ -24,31 +26,51 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       overflow: hidden;
     }
-    .rectangle-body, .rectangle-result {
+
+    .rectangle-body,
+    .rectangle-result {
       position: absolute;
       width: 320px;
       height: 80%;
-      background: #ffffff20;
-      border: 2px solid #ffffff60;
       border-radius: 16px;
       display: flex;
       justify-content: center;
       align-items: center;
-      writing-mode: vertical-lr;
+      flex-direction: column;
       text-align: center;
       font-weight: bold;
       font-size: 24px;
       color: #fff;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
       top: 10%;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
+
+    /* Body box mặc định */
     .rectangle-body {
       left: 5%;
+      background-color: rgba(255, 255, 255, 0.25);
+      border: 2px dashed rgba(128, 128, 128, 0.5);
     }
+
+    .rectangle-body:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Result box với style riêng */
     .rectangle-result {
       right: 5%;
+      background-color: #ffffff; /* nền trắng */
+      border: 2px solid #000000; /* viền đen nét liền */
+      color: #333; /* chữ tối hơn một chút để nổi trên nền trắng */
+      text-shadow: none; /* bỏ bóng chữ để dễ đọc hơn */
     }
+
     .middle-items {
       position: absolute;
       top: 50%;
@@ -59,42 +81,120 @@
       justify-content: space-between;
       height: 80%;
     }
+
     .square {
       width: 220px;
       height: 220px;
-      background: #fff;
+      background-color: rgba(255, 255, 255, 0.25);
+      border: 3px dashed rgba(208, 199, 212, 0.849);
       border-radius: 20px;
       margin: 10px auto;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       font-weight: bold;
       text-align: center;
       font-size: 18px;
       color: #c81ed8;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      overflow: hidden;
     }
+
     .square:hover {
       transform: scale(1.05);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-      background: #fff;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .square input[type="file"] {
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .square img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+
+    /* Viền nét liền riêng cho nút Choose Clothes */
+    .solid-border {
+      border: 2px solid rgba(90, 30, 110, 0.5);
+    }
+
+    /* Preview ảnh trong body */
+    .rectangle-body img {
+      max-height: 90%;
+      object-fit: contain;
+      margin-top: 10px;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="rectangle-body">Body</div>
-
-    <div class="middle-items">
-      <div class="square">Item 1</div>
-      <div class="square">Item 2<br>(Optional)</div>
-      <div class="square" onclick="window.location.href='https://uythanhpham.github.io/sprint_1_frontend_v4/index.html'" style="cursor: pointer;">
-        Choose Clothes
-      </div>      
+    <div class="rectangle-body" id="body-box">
+      Body
+      <input type="file" accept="image/*" onchange="previewImage(event, 'body-box')">
+      <img id="body-box-img" style="display:none;" />
     </div>
 
-    <div class="rectangle-result">Result</div>
+    <div class="middle-items">
+      <div class="square">
+        Item 1
+        <input type="file" accept="image/*" onchange="previewImage(event, 'item1-img')">
+        <img id="item1-img" style="display:none;" />
+      </div>
+
+      <div class="square">
+        Item 2<br>(Optional)
+        <input type="file" accept="image/*" onchange="previewImage(event, 'item2-img')">
+        <img id="item2-img" style="display:none;" />
+      </div>
+
+      <div class="square solid-border" onclick="window.location.href='https://uythanhpham.github.io/sprint_1_frontend_v4/index.html'">
+        👚 Choose Clothes
+      </div>
+    </div>
+
+    <div class="rectangle-result">
+      Result
+      <!-- Không có input file -->
+    </div>
   </div>
+
+  <script>
+    function previewImage(event, boxId) {
+      const file = event.target.files[0];
+      const container = document.getElementById(boxId);
+      const img = container.querySelector("img");
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          img.src = e.target.result;
+          img.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
 </body>
 </html>
