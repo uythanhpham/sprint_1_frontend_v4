@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang chọn đồ hấp dẫn ✨</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(45deg, #dbb0e3, #F3E5F5);
+    }
+    .container {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+    }
+    .rectangle-body, .rectangle-result {
+      position: absolute;
+      width: 320px;
+      height: 80%;
+      background: #ffffff20;
+      border: 2px solid #ffffff60;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      writing-mode: vertical-lr;
+      text-align: center;
+      font-weight: bold;
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      top: 10%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .rectangle-body {
+      left: 5%;
+    }
+    .rectangle-result {
+      right: 5%;
+    }
+    .middle-items {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 80%;
+    }
+    .square {
+      width: 220px;
+      height: 220px;
+      background: #fff;
+      border-radius: 20px;
+      margin: 10px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+      color: #c81ed8;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .square:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="rectangle-body">Body</div>
+
+    <div class="middle-items">
+      <div class="square">Item 1</div>
+      <div class="square">Item 2<br>(Optional)</div>
+      <div class="square" onclick="window.location.href='http://127.0.0.1:5500/index.html'" style="cursor: pointer;">
+        Choose Clothes
+      </div>      
+    </div>
+
+    <div class="rectangle-result">Result</div>
+  </div>
+</body>
+</html>
