@@ -12,19 +12,24 @@
       margin: 0;
       padding: 40px;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(45deg, #dbb0e3, #F3E5F5);
+      background-color: #f3e5f5; /* ✅ Nền đơn sắc thay vì gradient */
     }
 
     .container {
       position: relative;
       width: 100%;
-      height: 600px;
+      height: 670px;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       background-color: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.3);
       overflow: hidden;
+    }
+
+    .rectangle-body,
+    .square {
+      color: #cfc0cf; /* ✅ Màu chữ xám nhạt */
     }
 
     .rectangle-body,
@@ -40,7 +45,6 @@
       text-align: center;
       font-weight: bold;
       font-size: 24px;
-      color: #fff;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
       top: 10%;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -49,7 +53,6 @@
       transition: all 0.3s ease;
     }
 
-    /* Body box mặc định */
     .rectangle-body {
       left: 5%;
       background-color: rgba(255, 255, 255, 0.25);
@@ -62,13 +65,12 @@
       background-color: rgba(255, 255, 255, 0.3);
     }
 
-    /* Result box với style riêng */
     .rectangle-result {
       right: 5%;
-      background-color: #ffffff; /* nền trắng */
-      border: 2px solid #000000; /* viền đen nét liền */
-      color: #333; /* chữ tối hơn một chút để nổi trên nền trắng */
-      text-shadow: none; /* bỏ bóng chữ để dễ đọc hơn */
+      background-color: #ffffff;
+      border: 2px solid #000000;
+      color: #333;
+      text-shadow: none;
     }
 
     .middle-items {
@@ -96,7 +98,6 @@
       font-weight: bold;
       text-align: center;
       font-size: 18px;
-      color: #c81ed8;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s, box-shadow 0.3s;
       backdrop-filter: blur(8px);
@@ -125,12 +126,11 @@
       object-fit: cover;
     }
 
-    /* Viền nét liền riêng cho nút Choose Clothes */
     .solid-border {
       border: 2px solid rgba(90, 30, 110, 0.5);
+      color: #a020f0; /* ✅ Màu tím cho chữ “Choose Clothes” */
     }
 
-    /* Preview ảnh trong body */
     .rectangle-body img {
       max-height: 90%;
       object-fit: contain;
@@ -146,6 +146,15 @@
       opacity: 0;
       cursor: pointer;
     }
+
+    .solid-border {
+      border: 2px solid rgba(90, 30, 110, 0.5);
+      color: #a020f0;
+      width: 160px;   /* ✅ Thu nhỏ chiều rộng */
+      height: 80px;   /* ✅ Thu nhỏ chiều cao */
+      font-size: 16px; /* ✅ Thu nhỏ cỡ chữ nếu cần */
+    }
+
   </style>
 </head>
 <body>
@@ -176,7 +185,6 @@
 
     <div class="rectangle-result">
       Result
-      <!-- Không có input file -->
     </div>
   </div>
 
